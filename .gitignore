@@ -1,0 +1,19 @@
+Library/
+Temp/
+*.pdf
+Assets/Supercyan Character Pack Free Sample/Readme.pdf.meta
+ProjectSettings/
+.vs/Rock Paper Scissors Tutorial Project/xs/sqlite3/storage.ide-wal
+.vs/Rock Paper Scissors Tutorial Project/xs/sqlite3/storage.ide-shm
+.vs/Rock Paper Scissors Tutorial Project/xs/sqlite3/storage.ide
+.vs/Rock Paper Scissors Tutorial Project/xs/sqlite3/db.lock
+.vs/Rock Paper Scissors Tutorial Project/xs/UserPrefs.xml
+Assets/_Project-Input-Tutorial/
+Assets/e-Assets/Scripts/SCCP/
+Assets/Standard Assets/
+Assets/Supercyan Character Pack Free Sample/
+Rock Paper Scissors Tutorial Project/
+obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+*.cache
+input-action-assets-tutorial/tutorial_project_START.unitypackage
+input-action-assets-tutorial/tutorial_project_COMPLETED.unitypackage
