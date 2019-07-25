@@ -35,7 +35,7 @@ AnimatorController:
   m_Name: yBot
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: onGround
+  - m_Name: OnGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

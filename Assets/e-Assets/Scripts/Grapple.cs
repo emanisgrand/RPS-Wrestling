@@ -9,18 +9,27 @@ public class Grapple : MonoBehaviour
     [SerializeField] private    float       winDamage = 1f;
     
     // private member variables
+    private                     Animator    m_Animator;
     private                     RaycastHit  hit;
     private                     Opponent    opponent;
+    private                     bool        grappleAttempt;
+
+    void Start() {
+        m_Animator = GetComponent<Animator>();    
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {  //considering fine tuning options here with GetKeyUp */
             // make the ray come out of the hand. 
             // OR, even better
-            //TODO: Trigger an animation, and change this logic to collision detection to see
+            m_Animator.SetBool("grappleAttempt", true);
+            // and later change this logic to collision detection to see
             // if the collider from the animation is hitting the opponent. 
-            Debug.DrawRay(transform.position, transform.forward * reach, Color.yellow);
             Grab();
+        } 
+        if (Input.GetKeyUp(KeyCode.Space)){
+            m_Animator.SetBool("grappleAttempt", false);
         }
     }
 
