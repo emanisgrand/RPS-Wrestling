@@ -60,7 +60,9 @@
      <Compile Include="Assets\e-Assets\Inputs\Test Controls.cs" />
      <Compile Include="Assets\e-Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\GameplayController.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Grapple.cs" />
      <Compile Include="Assets\e-Assets\Scripts\InputController.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Opponent.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\CameraLogic.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\Demo.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\SimpleCharacterControl.cs" />
