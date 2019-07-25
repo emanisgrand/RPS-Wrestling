@@ -19,5 +19,5 @@ public class Opponent : MonoBehaviour
         // Opponent is counted out
         print("Opponent has lost the match");
 
-    }
+    } 
 }

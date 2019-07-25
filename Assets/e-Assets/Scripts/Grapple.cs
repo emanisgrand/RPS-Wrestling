@@ -18,7 +18,7 @@ public class Grapple : MonoBehaviour
             // make the ray come out of the hand. 
             // OR, even better
             //TODO: Trigger an animation, and change this logic to collision detection to see
-            //! if the collider from the animation is hitting the opponent. 
+            // if the collider from the animation is hitting the opponent. 
             Debug.DrawRay(transform.position, transform.forward * reach, Color.yellow);
             Grab();
         }
