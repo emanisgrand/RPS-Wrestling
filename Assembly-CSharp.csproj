@@ -90,6 +90,12 @@
  <Reference Include="Unity.Analytics.DataPrivacy">
  <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
+ <Reference Include="Cinemachine">
+ <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
