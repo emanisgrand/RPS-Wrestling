@@ -11,7 +11,7 @@ public class Opponent : MonoBehaviour
 
         if (health <= 0) {
             OpponentLoses();
-        }
+        } 
     }
 
     void OpponentLoses(){

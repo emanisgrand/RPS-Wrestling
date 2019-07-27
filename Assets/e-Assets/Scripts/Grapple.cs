@@ -10,7 +10,7 @@ public class Grapple : MonoBehaviour
     
     // private member variables
     private                     Animator    m_Animator;
-    private                     RaycastHit  hit;
+    //! private  deprecate      RaycastHit  hit;   
     private                     Opponent    opponent;
     private                     bool        grappleAttempt;
 
@@ -34,13 +34,16 @@ public class Grapple : MonoBehaviour
     }
 
     void Grab(){
-        //TODO: implement a layer mask for turnbuckle interaction
-        if (Physics.Raycast(transform.position, transform.forward, out hit, reach)){
+        //TODO: replace the raycast with hand triggers instead 
 
-        if (hit.collider.tag == "Opponent") {
-               opponent = hit.collider.gameObject.GetComponent<Opponent>();
-               opponent.TakeDamage(winDamage);
-            }    
-        }
+        
+
+        //! if (Physics.Raycast(transform.position, transform.forward, out hit, reach)){
+
+        //!    if (hit.collider.tag == "Opponent") {
+        //!        opponent = hit.collider.gameObject.GetComponent<Opponent>();
+        //!        opponent.TakeDamage(winDamage);
+        //!        }    
+        //!    }
     }
 }
