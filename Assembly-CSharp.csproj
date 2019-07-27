@@ -61,6 +61,7 @@
      <Compile Include="Assets\e-Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\GameplayController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Grapple.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Grapple1.cs" />
      <Compile Include="Assets\e-Assets\Scripts\InputController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Opponent.cs" />
      <Compile Include="Assets\e-Assets\Scripts\R_handTrigger.cs" />

@@ -5,17 +5,24 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     // private serialized fields
-    [SerializeField] private    float       reach     = 5f;
-    [SerializeField] private    float       winDamage = 1f;
+    // [SerializeField] private    float       reach     = 5f;
+    // [SerializeField] private    float       winDamage = 1f;
+    
+    
+    [SerializeField] private Collider handCollider;  //! set the Hand collider to pass into OnTriggerEnter
+    [SerializeField] private Transform grappleZone;  //! here's an empty transform to center the opponents
     
     // private member variables
     private                     Animator    m_Animator;
-    //! private  deprecate      RaycastHit  hit;   
+    private                     Animator    enemyAnim;
     private                     Opponent    opponent;
     private                     bool        grappleAttempt;
 
     void Start() {
         m_Animator = GetComponent<Animator>();    
+        enemyAnim = opponent.gameObject.GetComponent<Animator>();
+        handCollider = GetComponent<Collider>();
+        //handCollider = GetComponent<Collider>();
     }
 
     void Update()
@@ -26,24 +33,24 @@ public class Grapple : MonoBehaviour
             m_Animator.SetBool("grappleAttempt", true);
             // and later change this logic to collision detection to see
             // if the collider from the animation is hitting the opponent. 
-            Grab();
         } 
         if (Input.GetKeyUp(KeyCode.Space)){
             m_Animator.SetBool("grappleAttempt", false);
         }
     }
 
-    void Grab(){
-        //TODO: replace the raycast with hand triggers instead 
+    private void OnTriggerEnter(Collider handCollider) //? not sure if this handcollider is the right parameter to get the job done
+    {    
+        if (handCollider.gameObject.tag == "Opponent")
+        {
+            print("bopped " + handCollider.name);
+            opponent.gameObject.transform.parent = grappleZone;
+            // 1. Disable the opponents ability to move so fucking much
+            // Create an instance of the player transform script. Disable it.
+            // 2. trigger animation
 
-        
-
-        //! if (Physics.Raycast(transform.position, transform.forward, out hit, reach)){
-
-        //!    if (hit.collider.tag == "Opponent") {
-        //!        opponent = hit.collider.gameObject.GetComponent<Opponent>();
-        //!        opponent.TakeDamage(winDamage);
-        //!        }    
-        //!    }
+            enemyAnim.SetBool("Grappled", true);
+            //ToggleScripts(false);
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class R_handTrigger : AbstractBehavior
 {
     //public float grappleSpotOffset = 2f;
-    private  Transform   grappleZone;
+   
     private  Vector3     originalCenter;
     private  Animator    enemyAnim;
 
@@ -16,21 +16,21 @@ public class R_handTrigger : AbstractBehavior
         //! detach this part of the script that handles the grappleZone from the
         //! hand and move everything to the main Parent gameObject so that everything
         //! is more properly centered. I will try this out for now though juts to see.
-        grappleZone = GetComponent<Transform>();
+        // grappleZone = GetComponent<Transform>();
      }
 
-   private void OnTriggerEnter(Collider other) {
-     enemyAnim = other.gameObject.GetComponent<Animator>();
-       if (other.gameObject.tag == "Opponent") {
-            other.transform.parent = grappleZone;
-            // 1. Disable the opponents ability to move so fucking much
-            // Create an instance of the player transform script. Disable it.
-            // 2. trigger animation
+//    private void OnTriggerEnter(Collider other) {
+//      enemyAnim = other.gameObject.GetComponent<Animator>();
+//        if (other.gameObject.tag == "Opponent") {
+//             other.transform.parent = grappleZone;
+//             // 1. Disable the opponents ability to move so fucking much
+//             // Create an instance of the player transform script. Disable it.
+//             // 2. trigger animation
             
-            enemyAnim.SetBool("Grappled", true);
-            ToggleScripts(false);
-        }
-   }
+//             enemyAnim.SetBool("Grappled", true);
+//             //ToggleScripts(false);
+//         }
+//    }
 
   
 }
