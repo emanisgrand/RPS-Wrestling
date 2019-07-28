@@ -5,6 +5,15 @@ using UnityEngine;
 public class Opponent : MonoBehaviour
 {
     [SerializeField] private float health = 3f;
+    public GameObject   oppGameObject; 
+    public Collider     oppCollider;
+    public Rigidbody    oppBody;
+
+    private void Awake() {
+        oppGameObject   = this.gameObject;
+        oppCollider     = oppGameObject.GetComponent<Collider>();
+        oppBody         = oppGameObject.GetComponent<Rigidbody>();
+    }
 
     public void TakeDamage(float damageAmount){
         health -= damageAmount;

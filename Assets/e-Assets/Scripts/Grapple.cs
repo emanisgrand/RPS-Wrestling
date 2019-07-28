@@ -14,19 +14,26 @@ public class Grapple : MonoBehaviour
     [SerializeField] private Transform grappleZone;  //! here's an empty transform to center the opponents
     
     // private member variables
-    private                     Animator    m_Animator;
-    private                     Animator    enemyAnim;
-    private                     Opponent    opponent;
-    
+    private Animator    m_Animator;
+    private Animator    enemyAnim;
+    private Opponent    opponent;
     // a trigger to enable the collider
-    private bool isGrappling;
+    private bool        isGrappling;
     
     // the initial trigger I set up to parent the GO 
-    private                     bool        grappleAttempt;
+    private bool        grappleAttempt;
+
+    //call an instance of the R_handTrigger script
+    private R_handTrigger _handTrigger;
 
     void Start() {
+        
         m_Animator = GetComponent<Animator>();    
-        enemyAnim = opponent.gameObject.GetComponent<Animator>();
+        
+        if (enemyAnim != null) {
+            enemyAnim = opponent.gameObject.GetComponent<Animator>();
+        }
+        
         handCollider = GetComponent<Collider>();
         //handCollider = GetComponent<Collider>();
     }
@@ -41,23 +48,24 @@ public class Grapple : MonoBehaviour
             // if the collider from the animation is hitting the opponent. 
         } 
         if (Input.GetKeyUp(KeyCode.Space)){
+            print("Space Up");
             m_Animator.SetBool("grappleAttempt", false);
+            _handTrigger.isGrappled = false;
         }
     }
 
-    private void OnTriggerEnter(Collider handCollider) 
-    //? not sure if this handcollider is the right parameter to get the job done
-    {    
-        if (handCollider.gameObject.tag == "Opponent")
-        {
-            print("bopped " + handCollider.name);
-            opponent.gameObject.transform.parent = grappleZone;
-            // 1. Disable the opponents ability to move so fucking much
-            // Create an instance of the player transform script. Disable it.
-            // 2. trigger animation
+    // private void OnTriggerEnter(Collider handCollider)  {
+    // //? not sure if this handcollider is the right parameter to get the job done
+        
+    //     if (handCollider.gameObject.tag == "Opponent")
+    //     {
+    //         opponent.gameObject.transform.parent = grappleZone;
+    //         // 1. Disable the opponents ability to move so fucking much
+    //         // Create an instance of the player transform script. Disable it.
+    //         // 2. trigger animation
 
-            enemyAnim.SetBool("Grappled", true);
-            //ToggleScripts(false);
-        }
-    }
+    //         enemyAnim.SetBool("Grappled", true);
+    //         //ToggleScripts(false);
+    //     }
+    // }
 }

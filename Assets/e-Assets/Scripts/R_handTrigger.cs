@@ -1,58 +1,64 @@
-﻿using System.Collections;
+﻿//TODO: Figure out a way to have all of this work in the main gameObject
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // this script needs to change to specifically be a Grab() script.
 public class R_handTrigger : AbstractBehavior
 {
-    //public float grappleSpotOffset = 2f;
-    [SerializeField] private Transform grappleZone;
-    
     // Opponent's components =^P
-    private Opponent opponent;
-    private Rigidbody oppBody;
-    private bool isGrappled;
+    private Opponent    opponent;
+    private Rigidbody   oppBody;
+    private Collider    oppCollider;
+    [SerializeField] private Transform   playerTransform;
 
-    //! Useless vector3
-    private Vector3 originalCenter;
+    // Private member variables
+    [SerializeField] 
+    private Transform   grappleZone;
+    private Vector3     originalCenter;   //! Useless vector3 at the moment
+
+    // Public member variables
+    public bool isGrappled;
 
     // Access the Opponent's animator 
-    private Animator oppAnim;
+    private Animator    oppAnim;
 
     protected override void Awake()
     {
         base.Awake();
-        //? so...I could attach this empty transform to the hand trigger, but
-        //? that would be a little or a lot bit messy. It would be better to 
-        //? detach this part of the script that handles the grappleZone from the
-        //? hand and move everything to the main Parent gameObject so that everything
-        //? is more properly centered. I will try this out for now though juts to see.
-
-        oppBody = opponent.GetComponent<Rigidbody>();
+      
+        // playerTransform = gameObject.GetComponent<Transform>();
+        opponent        = opponent.gameObject.GetComponent<Opponent>();  //? calling the opponent script?
+        oppBody         = opponent.gameObject.GetComponent<Rigidbody>(); //? calling the Rigidbody that the opponent script is attached to, I hope.
+        oppCollider     = opponent.gameObject.GetComponent<CapsuleCollider>(); //? Callng the collider that the opponent script is attached to, again, I hope.
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
         oppAnim = other.gameObject.GetComponent<Animator>();
-        if (other.gameObject.tag == "Opponent")
+        if (other.gameObject.tag == "Opponent" && isGrappled == false)
         {
+            isGrappled = true;
+            other.transform.LookAt(playerTransform);
             other.transform.parent = grappleZone;
+            
+            //* 1. Disable the opponents ability to move so fucking much
             oppBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ;
             // other.transform.position = grappleZone.position;
-            // 1. Disable the opponents ability to move so fucking much
-            // Create an instance of the player transform script. Disable it.
-            // 2. trigger animation
-            //* Set the oppAnimator functionality */
+            
+            //* 2. trigger animation
+            //? Set the oppAnimator functionality */
             //enemyAnim.SetBool("Grappled", true);
             //ToggleScripts(false);
         }
     }
 
     private void Update() {
-        if (oppBody.transform.parent = grappleZone){
+        if (oppCollider.transform.parent == grappleZone){
             isGrappled = true;
             print("isGrappled = true");
-        }
+        } 
     }
 
 
