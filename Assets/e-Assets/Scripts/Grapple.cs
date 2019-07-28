@@ -8,6 +8,7 @@ public class Grapple : MonoBehaviour
     // [SerializeField] private    float       reach     = 5f;
     // [SerializeField] private    float       winDamage = 1f;
     
+    //! This code isn't doing anything right now.
     
     [SerializeField] private Collider handCollider;  //! set the Hand collider to pass into OnTriggerEnter
     [SerializeField] private Transform grappleZone;  //! here's an empty transform to center the opponents
@@ -16,6 +17,11 @@ public class Grapple : MonoBehaviour
     private                     Animator    m_Animator;
     private                     Animator    enemyAnim;
     private                     Opponent    opponent;
+    
+    // a trigger to enable the collider
+    private bool isGrappling;
+    
+    // the initial trigger I set up to parent the GO 
     private                     bool        grappleAttempt;
 
     void Start() {
@@ -39,7 +45,8 @@ public class Grapple : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider handCollider) //? not sure if this handcollider is the right parameter to get the job done
+    private void OnTriggerEnter(Collider handCollider) 
+    //? not sure if this handcollider is the right parameter to get the job done
     {    
         if (handCollider.gameObject.tag == "Opponent")
         {
