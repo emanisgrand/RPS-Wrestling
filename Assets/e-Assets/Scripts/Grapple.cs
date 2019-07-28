@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    // private serialized fields
-    // [SerializeField] private    float       reach     = 5f;
-    // [SerializeField] private    float       winDamage = 1f;
-    
     //! This code isn't doing anything right now.
     
     [SerializeField] private Collider handCollider;  //! set the Hand collider to pass into OnTriggerEnter
     [SerializeField] private Transform grappleZone;  //! here's an empty transform to center the opponents
     
     // private member variables
-    private Animator    m_Animator;
-    private Animator    enemyAnim;
-    private Opponent    opponent;
+    private Animator        m_Animator;
+    private Animator        enemyAnim;
+    private Opponent        opponent;
     // a trigger to enable the collider
-    private bool        isGrappling;
+    private bool            isGrappling;
     
     // the initial trigger I set up to parent the GO 
-    private bool        grappleAttempt;
+    private bool            grappleAttempt;
 
     //call an instance of the R_handTrigger script
-    private R_handTrigger _handTrigger;
+    private R_handTrigger   _handTrigger;
 
     void Start() {
         

@@ -13,6 +13,7 @@ public class Opponent : MonoBehaviour
         oppGameObject   = this.gameObject;
         oppCollider     = oppGameObject.GetComponent<Collider>();
         oppBody         = oppGameObject.GetComponent<Rigidbody>();
+        
     }
 
     public void TakeDamage(float damageAmount){
