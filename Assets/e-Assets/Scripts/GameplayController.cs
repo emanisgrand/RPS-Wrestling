@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameChoices {   
+public enum GamesChoices {   
     // * I was thinking something like this, but more for the outcomes than the choices themselves. I will have to try it this way though since it's basically done here.
     NONE,
     ROCK,
@@ -27,7 +27,7 @@ public class GameplayController : MonoBehaviour {
     [SerializeField]
     private Text infoText;
 
-    private GameChoices player_Choice = GameChoices.NONE, opponent_Choice = GameChoices.NONE;
+    private GamesChoices player_Choice = GamesChoices.NONE, opponent_Choice = GamesChoices.NONE;
 
     private AnimationController animationController;
 
@@ -36,33 +36,33 @@ public class GameplayController : MonoBehaviour {
     }
 
     //* Idk, but maybe this is where choices are set. */
-    public void SetChoices(GameChoices gameChoices) { 
+    public void SetChoices(GamesChoices gamesChoices) { 
     
-        switch(gameChoices) {
+        switch(gamesChoices) {
 
-            case GameChoices.ROCK:
+            case GamesChoices.ROCK:
 
             /* //! In this case, an image is switched out to represent the player's
             ! choice.  */
                 playerChoice_Img.sprite = rock_Sprite;
 
-                player_Choice = GameChoices.ROCK;
+                player_Choice = GamesChoices.ROCK;
 
                 break;
 
-            case GameChoices.PAPER:
+            case GamesChoices.PAPER:
 
                 playerChoice_Img.sprite = paper_Sprite;
 
-                player_Choice = GameChoices.PAPER;
+                player_Choice = GamesChoices.PAPER;
 
                 break;
 
-            case GameChoices.SCISSORS:
+            case GamesChoices.SCISSORS:
 
                 playerChoice_Img.sprite = scissors_Sprite;
 
-                player_Choice = GameChoices.SCISSORS;
+                player_Choice = GamesChoices.SCISSORS;
 
                 break;
 
@@ -86,7 +86,7 @@ public class GameplayController : MonoBehaviour {
             //? is this redundant? No. Because this is opponent choice and so is separate from
             //? player choice so it must be distinct, right? 
 
-                opponent_Choice = GameChoices.ROCK;
+                opponent_Choice = GamesChoices.ROCK;
 
                 opponentChoice_Img.sprite = rock_Sprite;
 
@@ -94,7 +94,7 @@ public class GameplayController : MonoBehaviour {
 
             case 1:
 
-                opponent_Choice = GameChoices.PAPER;
+                opponent_Choice = GamesChoices.PAPER;
 
                 opponentChoice_Img.sprite = paper_Sprite;
 
@@ -102,7 +102,7 @@ public class GameplayController : MonoBehaviour {
 
             case 2:
 
-                opponent_Choice = GameChoices.SCISSORS;
+                opponent_Choice = GamesChoices.SCISSORS;
 
                 opponentChoice_Img.sprite = scissors_Sprite;
 
@@ -128,7 +128,7 @@ public class GameplayController : MonoBehaviour {
 
         }
 
-        if(player_Choice == GameChoices.PAPER && opponent_Choice == GameChoices.ROCK) {
+        if(player_Choice == GamesChoices.PAPER && opponent_Choice == GamesChoices.ROCK) {
             // player won
 
             infoText.text = "You Win!";
@@ -137,7 +137,7 @@ public class GameplayController : MonoBehaviour {
             return;
         }
 
-        if (opponent_Choice == GameChoices.PAPER && player_Choice == GameChoices.ROCK) {
+        if (opponent_Choice == GamesChoices.PAPER && player_Choice == GamesChoices.ROCK) {
             // opponent won
 
             infoText.text = "You Lose!";
@@ -146,7 +146,7 @@ public class GameplayController : MonoBehaviour {
             return;
         }
 
-        if (player_Choice == GameChoices.ROCK && opponent_Choice == GameChoices.SCISSORS) {
+        if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS) {
             // player won
 
             infoText.text = "You Win!";
@@ -155,7 +155,7 @@ public class GameplayController : MonoBehaviour {
             return;
         }
 
-        if (opponent_Choice == GameChoices.ROCK && player_Choice == GameChoices.SCISSORS) {
+        if (opponent_Choice == GamesChoices.ROCK && player_Choice == GamesChoices.SCISSORS) {
             // opponent won
 
             infoText.text = "You Lose!";
@@ -164,7 +164,7 @@ public class GameplayController : MonoBehaviour {
             return;
         }
 
-        if (player_Choice == GameChoices.SCISSORS && opponent_Choice == GameChoices.PAPER) {
+        if (player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER) {
             // player won
 
             infoText.text = "You Win!";
@@ -173,7 +173,7 @@ public class GameplayController : MonoBehaviour {
             return;
         }
 
-        if (opponent_Choice == GameChoices.SCISSORS && player_Choice == GameChoices.PAPER) {
+        if (opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER) {
             // opponent won
 
             infoText.text = "You Lose!";

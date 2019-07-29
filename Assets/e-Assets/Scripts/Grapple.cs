@@ -48,20 +48,5 @@ public class Grapple : MonoBehaviour
             m_Animator.SetBool("grappleAttempt", false);
             _handTrigger.isGrappled = false;
         }
-    }
-
-    // private void OnTriggerEnter(Collider handCollider)  {
-    // //? not sure if this handcollider is the right parameter to get the job done
-        
-    //     if (handCollider.gameObject.tag == "Opponent")
-    //     {
-    //         opponent.gameObject.transform.parent = grappleZone;
-    //         // 1. Disable the opponents ability to move so fucking much
-    //         // Create an instance of the player transform script. Disable it.
-    //         // 2. trigger animation
-
-    //         enemyAnim.SetBool("Grappled", true);
-    //         //ToggleScripts(false);
-    //     }
-    // }
+    } 
 }
