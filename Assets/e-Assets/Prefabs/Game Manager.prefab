@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7185009594802739802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7185009594802739804}
+  - component: {fileID: 7185009594802739803}
+  - component: {fileID: 7185009594802739806}
+  - component: {fileID: 7185009594802739805}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7185009594802739804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7185009594802739803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a09302c889bd4737bf5d8040a31fcad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerChoiceHandlerAnimation: {fileID: 0}
+  choiceAnimation: {fileID: 0}
+--- !u!114 &7185009594802739806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11034223e1704e809084c03409ba394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rock_Sprite: {fileID: -1102031571439885487, guid: e4ff828f9826f4a069e6525bb6434a98,
+    type: 3}
+  paper_Sprite: {fileID: 3854786910656487587, guid: e4ff828f9826f4a069e6525bb6434a98,
+    type: 3}
+  scissors_Sprite: {fileID: -7669977693629282755, guid: e4ff828f9826f4a069e6525bb6434a98,
+    type: 3}
+  playerChoice_Img: {fileID: 0}
+  opponentChoice_Img: {fileID: 0}
+  infoText: {fileID: 0}
+--- !u!114 &7185009594802739805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9aa1dc5bc62041359439a9b7f0b0205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

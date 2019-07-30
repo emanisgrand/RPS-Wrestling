@@ -13,12 +13,7 @@ public enum GamesChoices {
 
 public class GameplayController : MonoBehaviour {
 
-    [SerializeField]  //? none of the sprite image member variables will be necessary unless 
-    //? I decide to implement some UI thing with them later. Which I am actually thinking 
-    //? about doing. Something like the Mix&Jam Persona 4 
-    //? cutscenes where they make a really big deal about the choice you end up making is 
-    //? actually quite perfect. 
-     
+    [SerializeField]       
     private Sprite rock_Sprite, paper_Sprite, scissors_Sprite;
 
     [SerializeField]
@@ -41,11 +36,9 @@ public class GameplayController : MonoBehaviour {
         switch(gamesChoices) {
 
             case GamesChoices.ROCK:
-
-            /* //! In this case, an image is switched out to represent the player's
-            ! choice.  */
+            
                 playerChoice_Img.sprite = rock_Sprite;
-
+                
                 player_Choice = GamesChoices.ROCK;
 
                 break;
@@ -53,7 +46,7 @@ public class GameplayController : MonoBehaviour {
             case GamesChoices.PAPER:
 
                 playerChoice_Img.sprite = paper_Sprite;
-
+                print("player selected" + gamesChoices);
                 player_Choice = GamesChoices.PAPER;
 
                 break;
@@ -61,7 +54,7 @@ public class GameplayController : MonoBehaviour {
             case GamesChoices.SCISSORS:
 
                 playerChoice_Img.sprite = scissors_Sprite;
-
+                print("player selected" + gamesChoices);
                 player_Choice = GamesChoices.SCISSORS;
 
                 break;

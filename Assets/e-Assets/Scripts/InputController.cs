@@ -10,8 +10,8 @@ public class InputController : MonoBehaviour {
     private string playersChoice;
 
     void Awake() {
-        animationController = GetComponent<AnimationController>();
-        gameplayController = GetComponent<GameplayController>();
+        animationController = gameObject.GetComponent<AnimationController>();
+        gameplayController = gameObject.GetComponent<GameplayController>();
     }
 
     public void GetChoice() {
@@ -25,14 +25,17 @@ public class InputController : MonoBehaviour {
 
             case "Rock":
                 selectedChoice = GamesChoices.ROCK;
+                print("player selected " + selectedChoice);
                 break;
 
             case "Paper":
                 selectedChoice = GamesChoices.PAPER;
+                print("player selected " + selectedChoice);
                 break;
 
             case "Scissors":
                 selectedChoice = GamesChoices.SCISSORS;
+                print("player selected " + selectedChoice);
                 break;
 
         }
