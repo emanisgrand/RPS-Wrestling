@@ -11,8 +11,8 @@ public class Opponent : MonoBehaviour
     // Public member variables that I don't think need to be public
     public string       targetTag = "HandTrigger";
     public GameObject   oppGameObject;    //? what do I need this GO for?
-    public Collider     oppCollider;      //? can I just use this collider?
-    public Rigidbody    oppBody;          //? I know I need this
+    public Collider     oppCollider; 
+    public Rigidbody    oppBody;          //! used in the constraints
     public bool         isGrappled;       //? big trigger
 
     // Private member variables
@@ -38,19 +38,16 @@ public class Opponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider target) {
         if (target.gameObject.tag == targetTag) {
-            print("triggered");
             oppAnim.SetBool("isGrappled", true);
             isGrappled = true;
 
             //* Move this to its own method */
             //? sets player transform as the parentObj
-            oppCollider.transform.parent = playerGoOpp.transform;
-            
+            oppCollider.transform.parent = grappleZone;
             //? constraints test
             oppBody.constraints =   RigidbodyConstraints.FreezePositionZ | 
                                     RigidbodyConstraints.FreezeRotationZ | 
                                     RigidbodyConstraints.FreezeRotationY;
-            
             //? turn and look at the grappler  
             oppCollider.transform.LookAt(playerTransform);           
         }
@@ -58,10 +55,8 @@ public class Opponent : MonoBehaviour
 
     /*
     if (isGrappled == true) {
-        oppCollider.transform.LookAt(//?playerTransform);
-        oppAnim.SetBool("isGrappled", true);
-        playerBody.constraints = RigidbodyConstraints....
-        oppBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ;
+        * playerBody.constraints = RigidbodyConstraints.FreezePositionX,Y,Z ?
+        
         
         * EngageRPS();
     }
