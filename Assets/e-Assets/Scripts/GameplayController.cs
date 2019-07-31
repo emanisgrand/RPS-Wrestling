@@ -13,6 +13,16 @@ public enum GamesChoices {
 
 public class GameplayController : MonoBehaviour {
 
+    //? we don't want our behaviors to actually know anything about other behaviors. 
+    //? All we want them to know is that at some point they can loop through all the scripts that are associated with it, 
+    //? and disable and enable them based on its own state 
+    //* public Animation[] animations; 
+
+    private Animator oppAnimator, playerAnimator;
+    private GameObject opponent;
+    private GameObject player;
+    private Opponent opponentScript;
+
     [SerializeField]       
     private Sprite rock_Sprite, paper_Sprite, scissors_Sprite;
 
@@ -27,10 +37,14 @@ public class GameplayController : MonoBehaviour {
     private AnimationController animationController;
 
     void Awake() {
+
         animationController = GetComponent<AnimationController>();
+        opponent = GameObject.FindGameObjectWithTag("Opponent");
+        player = GameObject.FindGameObjectWithTag("Player");
+        opponentScript = opponent.GetComponent<Opponent>();
     }
 
-    //* Idk, but maybe this is where choices are set. */
+
     public void SetChoices(GamesChoices gamesChoices) { 
     
         switch(gamesChoices) {
@@ -46,7 +60,6 @@ public class GameplayController : MonoBehaviour {
             case GamesChoices.PAPER:
 
                 playerChoice_Img.sprite = paper_Sprite;
-                print("player selected" + gamesChoices);
                 player_Choice = GamesChoices.PAPER;
 
                 break;
@@ -54,7 +67,6 @@ public class GameplayController : MonoBehaviour {
             case GamesChoices.SCISSORS:
 
                 playerChoice_Img.sprite = scissors_Sprite;
-                print("player selected" + gamesChoices);
                 player_Choice = GamesChoices.SCISSORS;
 
                 break;
@@ -70,14 +82,10 @@ public class GameplayController : MonoBehaviour {
     void SetOpponentChoice() {
 
         int rnd = Random.Range(0, 3);
-        //! switch cases used AGAIN! Except here there is not an enums array and instead
-        //! choices are created in the method itself and defined in the switcher.
 
         switch(rnd) {
 
             case 0:
-            //? is this redundant? No. Because this is opponent choice and so is separate from
-            //? player choice so it must be distinct, right? 
 
                 opponent_Choice = GamesChoices.ROCK;
 
@@ -108,15 +116,14 @@ public class GameplayController : MonoBehaviour {
     }
 
     void DetermineWinner() { 
-        //! here is the actual Decision tree, right? 
 
         if(player_Choice == opponent_Choice) {
             // draw
 
             infoText.text = "It's a Draw!";
-            StartCoroutine(DisplayWinnerAndRestart());  //! This "DisplayWinnerAndRestart()" function is
-                                                        //! I think, where I would be executing the 
-                                                        //! animations.
+        
+            StartCoroutine(DisplayWinnerAndRestart());  
+            StartCoroutine(DoSomeAnimation());
             return;
 
         }
@@ -126,7 +133,7 @@ public class GameplayController : MonoBehaviour {
 
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
-
+            StartCoroutine(DoSomeAnimation());
             return;
         }
 
@@ -135,7 +142,7 @@ public class GameplayController : MonoBehaviour {
 
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
-
+            StartCoroutine(DoSomeAnimation());
             return;
         }
 
@@ -144,7 +151,7 @@ public class GameplayController : MonoBehaviour {
 
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
-
+            StartCoroutine(DoSomeAnimation());
             return;
         }
 
@@ -153,7 +160,7 @@ public class GameplayController : MonoBehaviour {
 
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
-
+            StartCoroutine(DoSomeAnimation());
             return;
         }
 
@@ -162,7 +169,7 @@ public class GameplayController : MonoBehaviour {
 
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
-
+            StartCoroutine(DoSomeAnimation());
             return;
         }
 
@@ -171,13 +178,12 @@ public class GameplayController : MonoBehaviour {
 
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
-
+            StartCoroutine(DoSomeAnimation());
             return;
         }
 
     }
 
-    //! If I want to make this guy wait, then I need to use IEnumerator. 
     IEnumerator DisplayWinnerAndRestart() {
         yield return new WaitForSeconds(2f);
 
@@ -186,13 +192,41 @@ public class GameplayController : MonoBehaviour {
         yield return new WaitForSeconds(2f);
 
         infoText.gameObject.SetActive(false);
-        //? My animations will be way more complicated and varied than this.
-        //? It would be nice to have an array of animations to sift through 
+     
         animationController.ResetAnimations();
 
     }
 
-} // class
+    IEnumerator DoSomeAnimation() {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */
+       oppAnimator = opponent.GetComponent<Animator>();
+       playerAnimator = player.GetComponent<Animator>();
+
+        //* foreach (animation in animations[]) {  } */
+
+       opponentScript.isGrappled    = false;
+       //? In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
+       //? Here we unparent the Opponent's transform.
+       opponent.transform.parent    = null;  
+       oppAnimator.SetBool("isGrappled", false);
+       playerAnimator.SetBool("test", true);
+       oppAnimator.SetBool("test", true);
+       yield return new WaitForSeconds(10f);  //*  use animation time */
+       playerAnimator.SetBool("test", false);
+       oppAnimator.SetBool("test", false);
+    }
+
+    /*
+        protected virtual void AnimationsThingy (bool value)  //? should it take a bool or some other kind of parameter
+            {
+            
+                foreach (var animation in animationsArray)   //? I believe `var animation` sets the variable we're hoping to reference in the loop
+                {                                            //? so either we store animations OR the animation triggers. Such as a separate variable
+                    animation.setBool = value;               //? that contains all of the animation trigger names. 
+                }                                            //! refer to AbstractBehavior / Duck.cs as an example for how value is being used here.
+            }
+    */
+
+} 
 
 
 
