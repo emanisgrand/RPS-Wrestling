@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,32 +17,39 @@ public class GameplayController : MonoBehaviour {
     //? we don't want our behaviors to actually know anything about other behaviors. 
     //? All we want them to know is that at some point they can loop through all the scripts that are associated with it, 
     //? and disable and enable them based on its own state 
-    //* public Animation[] animations; 
+    //? public Animation[] animations; 
 
-    private Animator oppAnimator, playerAnimator;
-    private GameObject opponent;
-    private GameObject player;
-    private Opponent opponentScript;
+    
+    private Animator            oppAnimator, playerAnimator;
+
+    // All opponent references
+    private GameObject          opponent;
+    private Opponent            opponentScript;
+    
+    // All player references
+    private GameObject          player;
+    private Player              playerScript;
 
     [SerializeField]       
-    private Sprite rock_Sprite, paper_Sprite, scissors_Sprite;
+    private Sprite              rock_Sprite, paper_Sprite, scissors_Sprite;
 
     [SerializeField]
-    private Image playerChoice_Img, opponentChoice_Img;
+    private Image               playerChoice_Img, opponentChoice_Img;
 
     [SerializeField]
-    private Text infoText;
+    private Text                infoText;
 
-    private GamesChoices player_Choice = GamesChoices.NONE, opponent_Choice = GamesChoices.NONE;
+    private GamesChoices        player_Choice = GamesChoices.NONE, opponent_Choice = GamesChoices.NONE;
 
     private AnimationController animationController;
 
     void Awake() {
 
         animationController = GetComponent<AnimationController>();
-        opponent = GameObject.FindGameObjectWithTag("Opponent");
-        player = GameObject.FindGameObjectWithTag("Player");
-        opponentScript = opponent.GetComponent<Opponent>();
+        opponent            = GameObject.FindGameObjectWithTag("Opponent");
+        opponentScript      = opponent.GetComponent<Opponent>();
+        player              = GameObject.FindGameObjectWithTag("Player");
+        playerScript        = player.GetComponent<Player>();        
     }
 
 
@@ -119,9 +127,7 @@ public class GameplayController : MonoBehaviour {
 
         if(player_Choice == opponent_Choice) {
             // draw
-
             infoText.text = "It's a Draw!";
-        
             StartCoroutine(DisplayWinnerAndRestart());  
             StartCoroutine(DoSomeAnimation());
             return;
@@ -130,7 +136,7 @@ public class GameplayController : MonoBehaviour {
 
         if(player_Choice == GamesChoices.PAPER && opponent_Choice == GamesChoices.ROCK) {
             // player won
-
+            opponentScript.health--;
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -139,7 +145,7 @@ public class GameplayController : MonoBehaviour {
 
         if (opponent_Choice == GamesChoices.PAPER && player_Choice == GamesChoices.ROCK) {
             // opponent won
-
+            playerScript.TakeDamage(1);
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -148,7 +154,7 @@ public class GameplayController : MonoBehaviour {
 
         if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS) {
             // player won
-
+            opponentScript.health--;
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -157,7 +163,7 @@ public class GameplayController : MonoBehaviour {
 
         if (opponent_Choice == GamesChoices.ROCK && player_Choice == GamesChoices.SCISSORS) {
             // opponent won
-
+            playerScript.TakeDamage(1);
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -166,7 +172,7 @@ public class GameplayController : MonoBehaviour {
 
         if (player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER) {
             // player won
-
+            opponentScript.health--;
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -175,12 +181,13 @@ public class GameplayController : MonoBehaviour {
 
         if (opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER) {
             // opponent won
-
+            playerScript.TakeDamage(1);;
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
             return;
         }
+        
 
     }
 
@@ -204,8 +211,8 @@ public class GameplayController : MonoBehaviour {
         //* foreach (animation in animations[]) {  } */
 
        opponentScript.isGrappled    = false;
-       //? In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
-       //? Here we unparent the Opponent's transform.
+       //In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
+       //Here we unparent the Opponent's transform.
        opponent.transform.parent    = null;  
        oppAnimator.SetBool("isGrappled", false);
        playerAnimator.SetBool("test", true);
@@ -215,6 +222,7 @@ public class GameplayController : MonoBehaviour {
        oppAnimator.SetBool("test", false);
     }
 
+    //TODO:👇Animation array logic 
     /*
         protected virtual void AnimationsThingy (bool value)  //? should it take a bool or some other kind of parameter
             {

@@ -9,15 +9,14 @@ public class Opponent : MonoBehaviour
     
     
     // Public member variables that I don't think need to be public
-    public string       targetTag = "HandTrigger";
-    public GameObject   oppGameObject;    //? what do I need this GO for?
+    public string       targetTag       = "HandTrigger";
+    public GameObject   oppGameObject;    
     public Collider     oppCollider; 
-    public Rigidbody    oppBody;          //! used in the constraints
-    public bool         isGrappled;       //? big trigger
+    public Rigidbody    oppBody;        // used in the constraints
+    public bool         isGrappled;     // big trigger which will be widely used.
+    public float        health;
 
     // Private member variables
-    [SerializeField] 
-    private float       health = 3f;
     [SerializeField]
     private Transform   grappleZone;
     [SerializeField]
@@ -28,7 +27,7 @@ public class Opponent : MonoBehaviour
 
 
     private void Awake() {
-        playerGoOpp       = GameObject.FindGameObjectWithTag("Player");
+        playerGoOpp     = GameObject.FindGameObjectWithTag("Player");
         oppAnim         = GetComponent<Animator>();
         oppGameObject   = this.gameObject;
         oppCollider     = oppGameObject.GetComponent<Collider>();
@@ -52,7 +51,8 @@ public class Opponent : MonoBehaviour
             oppCollider.transform.LookAt(playerTransform);           
         }
     }
-
+    
+    //TODO: Unused logic here.See if there's anything useful
     /*
     if (isGrappled == true) {
         * playerBody.constraints = RigidbodyConstraints.FreezePositionX,Y,Z ?
@@ -61,10 +61,11 @@ public class Opponent : MonoBehaviour
         * EngageRPS();
     }
      */
-
+    
+    //* Called when Taking Damage
     public void TakeDamage(float damageAmount){
         health -= damageAmount;
-
+        print("Enemy has taken " + damageAmount + " damage.");
         if (health <= 0) {
             OpponentLoses();
         } 
@@ -75,7 +76,7 @@ public class Opponent : MonoBehaviour
     //* in it that were beings called when the bool was true. Find it. */
 
     void OpponentLoses(){
-        // Player can do a pin animation
+        // Player does a pin animation
         // Opponent is counted out
         print("Opponent has lost the match");
 

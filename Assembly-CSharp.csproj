@@ -59,16 +59,36 @@
      <Compile Include="Assets\e-Assets\Inputs\Player Controls.cs" />
      <Compile Include="Assets\e-Assets\Inputs\Test Controls.cs" />
      <Compile Include="Assets\e-Assets\Scripts\AnimationController.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\DamageDisplay.cs" />
      <Compile Include="Assets\e-Assets\Scripts\GameplayController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Grapple.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Grapple1.cs" />
      <Compile Include="Assets\e-Assets\Scripts\InputController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Opponent.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Player.cs" />
      <Compile Include="Assets\e-Assets\Scripts\R_handTrigger.cs" />
      <Compile Include="Assets\e-Assets\Scripts\RPSSystem.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\CameraLogic.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\Demo.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\SimpleCharacterControl.cs" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
