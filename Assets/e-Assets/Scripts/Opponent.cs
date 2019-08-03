@@ -15,6 +15,7 @@ public class Opponent : MonoBehaviour
     public Rigidbody    oppBody;        // used in the constraints
     public bool         isGrappled;     // big trigger which will be widely used.
     public float        health;
+    public bool         oppLost;
 
     // Private member variables
     [SerializeField]
@@ -61,24 +62,20 @@ public class Opponent : MonoBehaviour
         * EngageRPS();
     }
      */
-    
     //* Called when Taking Damage
     public void TakeDamage(float damageAmount){
         health -= damageAmount;
         print("Enemy has taken " + damageAmount + " damage.");
         if (health <= 0) {
             OpponentLoses();
+            oppLost = false;
         } 
     }
-
-    //TODO: Find the example bool method from previous project.
-    //* There was a method that was basically a boolean and had a bunch of actions
-    //* in it that were beings called when the bool was true. Find it. */
 
     void OpponentLoses(){
         // Player does a pin animation
         // Opponent is counted out
         print("Opponent has lost the match");
-
+        oppLost = true;
     } 
 }

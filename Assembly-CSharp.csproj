@@ -62,8 +62,9 @@
      <Compile Include="Assets\e-Assets\Scripts\DamageDisplay.cs" />
      <Compile Include="Assets\e-Assets\Scripts\GameplayController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Grapple.cs" />
-     <Compile Include="Assets\e-Assets\Scripts\Grapple1.cs" />
-     <Compile Include="Assets\e-Assets\Scripts\InputController.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Inputs\InputController.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Inputs\InputManager.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Inputs\InputState.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Opponent.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Player.cs" />
      <Compile Include="Assets\e-Assets\Scripts\R_handTrigger.cs" />

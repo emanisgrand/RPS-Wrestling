@@ -8,6 +8,7 @@ public class DamageDisplay : MonoBehaviour
     //Text mesh holder
     public TextMeshProUGUI OpponentTmpText, PlayerTmpText;
 
+    // Player & Opponent References
     private GameObject opponent;
     private Opponent opponentScript;
     private GameObject player;

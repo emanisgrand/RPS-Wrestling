@@ -7,17 +7,36 @@ public class InputController : MonoBehaviour {
     private AnimationController animationController;
     private GameplayController gameplayController;
 
+    // Opponent references
+    private GameObject opponent;
+    private Opponent opponentScript;
+
     private string playersChoice;
 
     void Awake() {
         animationController = gameObject.GetComponent<AnimationController>();
         gameplayController = gameObject.GetComponent<GameplayController>();
+        opponent = GameObject.FindGameObjectWithTag("Opponent");
+        opponentScript = opponent.GetComponent<Opponent>();
     }
 
-    public void GetChoice() {
+    protected virtual void Update(){
+        
+        if(Input.GetKeyDown(KeyCode.R) && opponentScript.isGrappled == true) {
+            GetChoice("Rock");
+        }
+        if (Input.GetKeyDown(KeyCode.F) && opponentScript.isGrappled == true) {
+            GetChoice("Paper");
+        }
+        if (Input.GetKeyDown(KeyCode.C) && opponentScript.isGrappled == true) {
+            GetChoice("Scissors");
+        }
+    }
 
-        string choiceName = UnityEngine.EventSystems.
-            EventSystem.current.currentSelectedGameObject.name;
+    public void GetChoice(string choiceName) {
+
+        // string choiceName = UnityEngine.EventSystems.
+        //     EventSystem.current.currentSelectedGameObject.name;
 
         GamesChoices selectedChoice = GamesChoices.NONE;
 

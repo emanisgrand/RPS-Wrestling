@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum GamesChoices {   
-    // * I was thinking something like this, but more for the outcomes than the choices themselves. I will have to try it this way though since it's basically done here.
     NONE,
     ROCK,
     PAPER,
@@ -19,28 +18,23 @@ public class GameplayController : MonoBehaviour {
     //? and disable and enable them based on its own state 
     //? public Animation[] animations; 
 
-    
+    // Player & Opponent References
     private Animator            oppAnimator, playerAnimator;
-
-    // All opponent references
     private GameObject          opponent;
     private Opponent            opponentScript;
-    
-    // All player references
     private GameObject          player;
     private Player              playerScript;
 
+    // Sprites & images
     [SerializeField]       
     private Sprite              rock_Sprite, paper_Sprite, scissors_Sprite;
-
     [SerializeField]
     private Image               playerChoice_Img, opponentChoice_Img;
-
     [SerializeField]
     private Text                infoText;
 
+    // enums and anims
     private GamesChoices        player_Choice = GamesChoices.NONE, opponent_Choice = GamesChoices.NONE;
-
     private AnimationController animationController;
 
     void Awake() {
@@ -136,7 +130,7 @@ public class GameplayController : MonoBehaviour {
 
         if(player_Choice == GamesChoices.PAPER && opponent_Choice == GamesChoices.ROCK) {
             // player won
-            opponentScript.health--;
+            opponentScript.TakeDamage(1);
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -154,7 +148,7 @@ public class GameplayController : MonoBehaviour {
 
         if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS) {
             // player won
-            opponentScript.health--;
+            opponentScript.TakeDamage(1);
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
@@ -172,7 +166,7 @@ public class GameplayController : MonoBehaviour {
 
         if (player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER) {
             // player won
-            opponentScript.health--;
+            opponentScript.TakeDamage(1);
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(DoSomeAnimation());
