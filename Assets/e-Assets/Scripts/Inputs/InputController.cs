@@ -10,6 +10,10 @@ public class InputController : MonoBehaviour {
     // Opponent references
     private GameObject opponent;
     private Opponent opponentScript;
+    
+    //? The game enabler
+    [SerializeField]
+    private bool canPlay;
 
     private string playersChoice;
 
@@ -18,6 +22,7 @@ public class InputController : MonoBehaviour {
         gameplayController = gameObject.GetComponent<GameplayController>();
         opponent = GameObject.FindGameObjectWithTag("Opponent");
         opponentScript = opponent.GetComponent<Opponent>();
+        canPlay = true;
     }
 
     protected virtual void Update(){
@@ -59,7 +64,10 @@ public class InputController : MonoBehaviour {
 
         }
 
+        if (canPlay == true){
         gameplayController.SetChoices(selectedChoice);
+        }
+
         animationController.PlayerMadeChoice();
 
     }

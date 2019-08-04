@@ -44,8 +44,8 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         foreach (var input in inputs){
-            inputState.SetButtonValue(input.button, input.value); // loop through the inputs in value and abstract which button is being pressed.
-        
+            // loop through the inputs in value and abstract which button is being pressed.
+            inputState.SetButtonValue(input.button, input.value);
         }
     }
 

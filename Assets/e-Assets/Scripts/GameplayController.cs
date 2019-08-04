@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum GamesChoices {   
     NONE,
@@ -24,7 +25,8 @@ public class GameplayController : MonoBehaviour {
     private Opponent            opponentScript;
     private GameObject          player;
     private Player              playerScript;
-
+    private bool                canPlay;
+    
     // Sprites & images
     [SerializeField]       
     private Sprite              rock_Sprite, paper_Sprite, scissors_Sprite;
@@ -32,9 +34,12 @@ public class GameplayController : MonoBehaviour {
     private Image               playerChoice_Img, opponentChoice_Img;
     [SerializeField]
     private Text                infoText;
+    [SerializeField]
+    private TextMeshProUGUI     displayWinnerText;
 
     // enums and anims
-    private GamesChoices        player_Choice = GamesChoices.NONE, opponent_Choice = GamesChoices.NONE;
+    private GamesChoices        player_Choice = GamesChoices.NONE, 
+                                opponent_Choice = GamesChoices.NONE;
     private AnimationController animationController;
 
     void Awake() {
@@ -43,7 +48,9 @@ public class GameplayController : MonoBehaviour {
         opponent            = GameObject.FindGameObjectWithTag("Opponent");
         opponentScript      = opponent.GetComponent<Opponent>();
         player              = GameObject.FindGameObjectWithTag("Player");
-        playerScript        = player.GetComponent<Player>();        
+        playerScript        = player.GetComponent<Player>();       
+        displayWinnerText   = GetComponent<TextMeshProUGUI>();
+        canPlay             = true;
     }
 
 
@@ -122,8 +129,8 @@ public class GameplayController : MonoBehaviour {
         if(player_Choice == opponent_Choice) {
             // draw
             infoText.text = "It's a Draw!";
-            StartCoroutine(DisplayWinnerAndRestart());  
-            StartCoroutine(DoSomeAnimation());
+            StartCoroutine(DisplayWinnerAndRestart());
+            Ungrapple();
             return;
 
         }
@@ -181,8 +188,17 @@ public class GameplayController : MonoBehaviour {
             StartCoroutine(DoSomeAnimation());
             return;
         }
-        
 
+        if (opponentScript.health <= 0) {
+            displayWinnerText.enabled = true;
+            displayWinnerText.text = "A winner is you!";
+        }
+
+
+        if (playerScript.health <= 0) {
+            displayWinnerText.enabled = true;
+            displayWinnerText.text = "A winner is not you!";
+        }
     }
 
     IEnumerator DisplayWinnerAndRestart() {
@@ -196,6 +212,12 @@ public class GameplayController : MonoBehaviour {
      
         animationController.ResetAnimations();
 
+    }
+
+    void Ungrapple(){
+        opponent.transform.parent = null;
+        opponentScript.isGrappled = false;
+        oppAnimator.SetBool("isGrappled", false);
     }
 
     IEnumerator DoSomeAnimation() {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */

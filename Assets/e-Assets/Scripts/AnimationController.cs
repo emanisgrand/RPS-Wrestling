@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour {
 
     [SerializeField]
-    private Animator playerChoiceHandlerAnimation, choiceAnimation;
+    private Animator playerChoiceHandlerAnimation, choiceAnimation, decisionAnimation;
 
     public void ResetAnimations() {
         playerChoiceHandlerAnimation.Play("ShowHandler");

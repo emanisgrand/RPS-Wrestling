@@ -24,7 +24,6 @@ public class Opponent : MonoBehaviour
     private Transform playerTransform;
     //Oppoenent Animator
     private Animator    oppAnim;
-    
 
 
     private void Awake() {
@@ -33,7 +32,6 @@ public class Opponent : MonoBehaviour
         oppGameObject   = this.gameObject;
         oppCollider     = oppGameObject.GetComponent<Collider>();
         oppBody         = oppGameObject.GetComponent<Rigidbody>();
-
     }
 
     private void OnTriggerEnter(Collider target) {
