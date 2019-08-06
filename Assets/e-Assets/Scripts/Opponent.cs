@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 public class Opponent : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class Opponent : MonoBehaviour
 
     // Private member variables
     [SerializeField]
-    private Transform   grappleZone;
+    private Transform       grappleZone;
     [SerializeField]
-    private Transform playerTransform;
+    private Transform       playerTransform;
     //Oppoenent Animator
-    private Animator    oppAnim;
+    private Animator        oppAnim;
 
 
     private void Awake() {
@@ -63,7 +63,6 @@ public class Opponent : MonoBehaviour
     //* Called when Taking Damage
     public void TakeDamage(float damageAmount){
         health -= damageAmount;
-        print("Enemy has taken " + damageAmount + " damage.");
         if (health <= 0) {
             OpponentLoses();
             oppLost = false;
@@ -73,7 +72,6 @@ public class Opponent : MonoBehaviour
     void OpponentLoses(){
         // Player does a pin animation
         // Opponent is counted out
-        print("Opponent has lost the match");
         oppLost = true;
     } 
 }

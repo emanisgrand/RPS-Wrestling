@@ -21,6 +21,7 @@ public class DamageDisplay : MonoBehaviour
         playerScript = player.GetComponent<Player>();
     }
 
+    //TODO: Make an UpdateUI function that is called whenever the values change.
     void Update()
     {
         PlayerTmpText.text = "Player: " + playerScript.health.ToString();

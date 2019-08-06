@@ -60,6 +60,7 @@
      <Compile Include="Assets\e-Assets\Inputs\Test Controls.cs" />
      <Compile Include="Assets\e-Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\DamageDisplay.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\DisplayWinner.cs" />
      <Compile Include="Assets\e-Assets\Scripts\GameplayController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Grapple.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Inputs\InputController.cs" />
@@ -72,6 +73,7 @@
      <Compile Include="Assets\e-Assets\Scripts\SCCP\CameraLogic.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\Demo.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\SimpleCharacterControl.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\TitleControl.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

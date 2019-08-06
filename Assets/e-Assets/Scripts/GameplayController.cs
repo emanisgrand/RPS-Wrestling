@@ -27,6 +27,8 @@ public class GameplayController : MonoBehaviour {
     private Player              playerScript;
     private bool                canPlay;
     
+    private GameObject          winnerDisplay;
+
     // Sprites & images
     [SerializeField]       
     private Sprite              rock_Sprite, paper_Sprite, scissors_Sprite;
@@ -34,8 +36,6 @@ public class GameplayController : MonoBehaviour {
     private Image               playerChoice_Img, opponentChoice_Img;
     [SerializeField]
     private Text                infoText;
-    [SerializeField]
-    private TextMeshProUGUI     displayWinnerText;
 
     // enums and anims
     private GamesChoices        player_Choice = GamesChoices.NONE, 
@@ -43,16 +43,14 @@ public class GameplayController : MonoBehaviour {
     private AnimationController animationController;
 
     void Awake() {
-
         animationController = GetComponent<AnimationController>();
         opponent            = GameObject.FindGameObjectWithTag("Opponent");
         opponentScript      = opponent.GetComponent<Opponent>();
         player              = GameObject.FindGameObjectWithTag("Player");
         playerScript        = player.GetComponent<Player>();       
-        displayWinnerText   = GetComponent<TextMeshProUGUI>();
+        
         canPlay             = true;
     }
-
 
     public void SetChoices(GamesChoices gamesChoices) { 
     
@@ -85,7 +83,6 @@ public class GameplayController : MonoBehaviour {
         SetOpponentChoice();
 
         DetermineWinner();
-
     }
 
     void SetOpponentChoice() {
@@ -188,17 +185,7 @@ public class GameplayController : MonoBehaviour {
             StartCoroutine(DoSomeAnimation());
             return;
         }
-
-        if (opponentScript.health <= 0) {
-            displayWinnerText.enabled = true;
-            displayWinnerText.text = "A winner is you!";
-        }
-
-
-        if (playerScript.health <= 0) {
-            displayWinnerText.enabled = true;
-            displayWinnerText.text = "A winner is not you!";
-        }
+       
     }
 
     IEnumerator DisplayWinnerAndRestart() {
@@ -253,6 +240,8 @@ public class GameplayController : MonoBehaviour {
 } 
 
 
+//TODO: Create a match RESET where player health is set back to full and the UI is reset.
+//TODO could also just reset the scene.
 
 
 
