@@ -6,7 +6,7 @@
             "id": "78d37dff-b916-4ceb-a8ff-2e79f7c496c4",
             "actions": [
                 {
-                    "name": "Grow",
+                    "name": "Run",
                     "type": "Button",
                     "id": "c238b9a7-ce4e-48c9-ae71-514d3f95ec44",
                     "expectedControlType": "",
@@ -28,6 +28,38 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "9dadf57f-7d9d-4a4c-89e1-d987dd81216b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Rock",
+                    "type": "Button",
+                    "id": "153823d7-4215-4f09-8104-666a2db8e893",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Paper",
+                    "type": "Button",
+                    "id": "2b523ea7-331f-46c5-85de-64adf80ee5d4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Scissor",
+                    "type": "Button",
+                    "id": "ed6ccdb3-efc1-4180-8960-df5319b26f04",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -38,7 +70,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grow",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,6 +93,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "536b2d34-5d08-44f0-bb74-3cd41ee892e1",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d028bd81-b1bd-4801-93bd-7cf6baf49c53",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67da0b62-c1a2-472d-ae1d-da8c00e33594",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Paper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ca513c9-cf07-4f56-8d0d-04bc08b72a4d",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scissor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

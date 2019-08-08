@@ -34,12 +34,8 @@ public class DisplayWinner : MonoBehaviour
         if (playerScript.health <= 0) {
             winnerDisplay.text = "A winner is not you!";
             ResetText();
-        }
-        
-        
+        }   
     }
-
-    
 
     IEnumerator ResetText() {
         yield return new WaitForSeconds(2f);

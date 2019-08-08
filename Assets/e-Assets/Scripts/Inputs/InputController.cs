@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour {
+    TestControls controls;
 
     private AnimationController animationController;
     private GameplayController gameplayController;
@@ -14,10 +16,14 @@ public class InputController : MonoBehaviour {
     //? The game enabler
     [SerializeField]
     private bool canPlay;
-
     private string playersChoice;
 
     void Awake() {
+        controls = new TestControls();
+        controls.Gameplay.Rock.performed += ctx => Rock();
+        controls.Gameplay.Paper.performed += ctx => Paper();
+        controls.Gameplay.Scissor.performed += ctx => Scissor();
+
         animationController = gameObject.GetComponent<AnimationController>();
         gameplayController = gameObject.GetComponent<GameplayController>();
         opponent = GameObject.FindGameObjectWithTag("Opponent");
@@ -34,6 +40,22 @@ public class InputController : MonoBehaviour {
             GetChoice("Paper");
         }
         if (Input.GetKeyDown(KeyCode.C) && opponentScript.isGrappled == true) {
+            GetChoice("Scissors");
+        }
+    }
+
+    void Rock(){
+        if (opponentScript.isGrappled == true) {
+            GetChoice("Rock");
+        }
+    }
+    void Paper(){
+        if (opponentScript.isGrappled == true){
+            GetChoice("Paper");
+        }
+    }
+    void Scissor(){
+        if (opponentScript.isGrappled == true) {
             GetChoice("Scissors");
         }
     }
@@ -69,9 +91,17 @@ public class InputController : MonoBehaviour {
         }
 
         animationController.PlayerMadeChoice();
-
     }
 
+    private void OnEnable()
+        {
+            controls.Gameplay.Enable();
+        }
+
+        private void OnDisable()
+        {
+            controls.Gameplay.Disable();
+        }
 
 
 } // class

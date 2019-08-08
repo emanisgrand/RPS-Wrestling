@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public enum GamesChoices {   
     NONE,
@@ -13,11 +12,6 @@ public enum GamesChoices {
 }
 
 public class GameplayController : AbstractBehavior {
-
-    //? we don't want our behaviors to actually know anything about other behaviors. 
-    //? All we want them to know is that at some point they can loop through all the scripts that are associated with it, 
-    //? and disable and enable them based on its own state 
-    //? public Animation[] animations; 
 
     // Player & Opponent References
     private Animator            oppAnimator, playerAnimator;
@@ -125,7 +119,7 @@ public class GameplayController : AbstractBehavior {
 
         if(player_Choice == opponent_Choice) {
             // draw
-            infoText.text = "It's a Draw!";
+            infoText.text = "zzzzzzz";
             Ungrapple();
             StartCoroutine(DisplayWinnerAndRestart());
             return;
@@ -133,14 +127,20 @@ public class GameplayController : AbstractBehavior {
         }
 
         if(player_Choice == GamesChoices.PAPER && opponent_Choice == GamesChoices.ROCK ||
-            player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS ||
             player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER ) {
             // player won
             opponentScript.TakeDamage(1);
-            ToggleScripts(false);
-            infoText.text = "You Win!";
+            infoText.text = "FANCY!";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(PlayerAttackAnim());
+            return;
+        }
+
+        if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS){
+            opponentScript.TakeDamage(1);
+            infoText.text = "ROCK!";
+            StartCoroutine(DisplayWinnerAndRestart());
+            StartCoroutine(RockAnim());
             return;
         }
 
@@ -150,61 +150,19 @@ public class GameplayController : AbstractBehavior {
             // opponent won
             playerScript.TakeDamage(1);
             ToggleScripts(false);
-            infoText.text = "You Lose!";
+            infoText.text = "KICK ROCKS";
             StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(PlayerAttackAnim());
+            StartCoroutine(OpponentAttackAnim());
             return;
-        }
-
-        // if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS) {
-        //     // player won
-        //     opponentScript.TakeDamage(1);
-        //     infoText.text = "You Win!";
-        //     StartCoroutine(DisplayWinnerAndRestart());
-        //     StartCoroutine(DoSomeAnimation());
-        //     return;
-        // }
-
-        // if (opponent_Choice == GamesChoices.ROCK && player_Choice == GamesChoices.SCISSORS) {
-        //     // opponent won
-        //     playerScript.TakeDamage(1);
-        //     infoText.text = "You Lose!";
-        //     StartCoroutine(DisplayWinnerAndRestart());
-        //     StartCoroutine(DoSomeAnimation());
-        //     return;
-        // }
-
-        // if (player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER) {
-        //     // player won
-        //     opponentScript.TakeDamage(1);
-        //     infoText.text = "You Win!";
-        //     StartCoroutine(DisplayWinnerAndRestart());
-        //     StartCoroutine(DoSomeAnimation());
-        //     return;
-        // }
-
-        // if (opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER) {
-        //     // opponent won
-        //     playerScript.TakeDamage(1);;
-        //     infoText.text = "You Lose!";
-        //     StartCoroutine(DisplayWinnerAndRestart());
-        //     StartCoroutine(DoSomeAnimation());
-        //     return;
-        // }
-       
+        }       
     }
 
     IEnumerator DisplayWinnerAndRestart() {
         yield return new WaitForSeconds(2f);
-
         infoText.gameObject.SetActive(true);
-
         yield return new WaitForSeconds(2f);
-
         infoText.gameObject.SetActive(false);
-     
         animationController.ResetAnimations();
-
     }
 
     void Ungrapple(){
@@ -213,41 +171,59 @@ public class GameplayController : AbstractBehavior {
         oppAnimator.SetBool("isGrappled", false);
     }
 
-    IEnumerator PlayerAttackAnim() {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */
+    //* take in an array of possible animations or animation triggers set by the choice that gets made */
+    IEnumerator PlayerAttackAnim() {                        
        oppAnimator = opponent.GetComponent<Animator>();
        playerAnimator = player.GetComponent<Animator>();
-
-        //* foreach (animation in animations[]) {  } */
-
+       //* foreach (animation in animations[]) {  } */
        opponentScript.isGrappled    = false;
        //In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
        //Here we unparent the Opponent's transform.
        opponent.transform.parent    = null;  
        oppAnimator.SetBool("isGrappled", false);
-       playerAnimator.SetBool("test", true);
-       oppAnimator.SetBool("test", true);
-       yield return new WaitForSeconds(10f);  //*  use animation time */
-       playerAnimator.SetBool("test", false);
-       oppAnimator.SetBool("test", false);
+       playerAnimator.SetBool("won", true);
+       oppAnimator.SetBool("lost", true);
+        //*  use animation time */
+        yield return new WaitForSeconds(4f);  
+       playerAnimator.SetBool("won", false);
+       oppAnimator.SetBool("lost", false);
     }
 
-    IEnumerator OpponentAttackAnim()
-    {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */
+    IEnumerator OpponentAttackAnim() {                         
+        
         oppAnimator = opponent.GetComponent<Animator>();
         playerAnimator = player.GetComponent<Animator>();
-
-        //* foreach (animation in animations[]) {  } */
 
         opponentScript.isGrappled = false;
         //In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
         //Here we unparent the Opponent's transform.
         opponent.transform.parent = null;
         oppAnimator.SetBool("isGrappled", false);
-        playerAnimator.SetBool("test", true);
-        oppAnimator.SetBool("test", true);
-        yield return new WaitForSeconds(10f);  //*  use animation time */
-        playerAnimator.SetBool("test", false);
-        oppAnimator.SetBool("test", false);
+        playerAnimator.SetBool("lost", true);
+        oppAnimator.SetBool("won", true);
+        //*  use animation time */
+        yield return new WaitForSeconds(4f);  
+        playerAnimator.SetBool("lost", false);
+        oppAnimator.SetBool("won", false);
+    }
+
+    IEnumerator RockAnim()
+    {
+
+        oppAnimator = opponent.GetComponent<Animator>();
+        playerAnimator = player.GetComponent<Animator>();
+
+        opponentScript.isGrappled = false;
+        //In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
+        //Here we unparent the Opponent's transform.
+        opponent.transform.parent = null;
+        oppAnimator.SetBool("isGrappled", false);
+        playerAnimator.SetBool("isRock", true);
+        oppAnimator.SetBool("rockHit", true);
+        //*  use animation time */
+        yield return new WaitForSeconds(4f);
+        playerAnimator.SetBool("isRock", false);
+        oppAnimator.SetBool("rockHit", false);
     }
 
     //TODO:👇Animation array logic 

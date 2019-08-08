@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf47412d554d1094b946ac4be98934c6
+guid: a0f5838634c29a84a811c8049075e4be
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ROCK
+      name: hit-by-ROCK
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 82
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

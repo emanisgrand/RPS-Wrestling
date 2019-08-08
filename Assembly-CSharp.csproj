@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Cube.cs" />
-     <Compile Include="Assets\e-Assets\Inputs\Player Controls.cs" />
      <Compile Include="Assets\e-Assets\Inputs\Test Controls.cs" />
      <Compile Include="Assets\e-Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\e-Assets\Scripts\DamageDisplay.cs" />

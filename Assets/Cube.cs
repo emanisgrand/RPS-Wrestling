@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Cube : MonoBehaviour
 {
+
+
     TestControls controls;
 
     // this is the value that the context reader will read.
@@ -16,7 +18,7 @@ public class Cube : MonoBehaviour
         //? Lambda expression is used here. 
         //! 'ctx' is the stand in for "context" and seems to be defined inline
         // go into the Input Controller I created and add the context I called Grow to your perform command.
-        controls.Gameplay.Grow.performed += ctx => Grow();
+        controls.Gameplay.Run.performed += ctx => Run();
 
         // similar to Grow, here I am telling you to read my move variable, and add that to the Move action that I created.
         //TODO: test read value to see how it handles vector3s
@@ -38,9 +40,10 @@ public class Cube : MonoBehaviour
         transform.Rotate(r, Space.World);
     }
 
-    void Grow(){
+    void Run(){
         // this is the actual grow function used when Grow is set to perform. 
         transform.localScale *= 1.1f;
+        
     }
 
     // here the controls are enabled
