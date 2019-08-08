@@ -18,8 +18,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         private AudioSource m_AudioSource;
 
+        
+        
+
         private void Start()
-        {
+        {   
+            // var playerScript = gameObject.GetComponent<Player>();
             // get the transform of the main camera
             if (Camera.main != null)
             {

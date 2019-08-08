@@ -69,6 +69,7 @@
      <Compile Include="Assets\e-Assets\Scripts\Opponent.cs" />
      <Compile Include="Assets\e-Assets\Scripts\Player.cs" />
      <Compile Include="Assets\e-Assets\Scripts\R_handTrigger.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\ReplayButton.cs" />
      <Compile Include="Assets\e-Assets\Scripts\RPSSystem.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\CameraLogic.cs" />
      <Compile Include="Assets\e-Assets\Scripts\SCCP\Demo.cs" />

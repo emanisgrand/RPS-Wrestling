@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 7185009594802739803}
   - component: {fileID: 7185009594802739806}
   - component: {fileID: 7185009594802739805}
+  - component: {fileID: 1296990887}
+  - component: {fileID: 1296990890}
+  - component: {fileID: 1296990891}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -47,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerChoiceHandlerAnimation: {fileID: 0}
   choiceAnimation: {fileID: 0}
+  decisionAnimation: {fileID: 0}
 --- !u!114 &7185009594802739806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,12 +63,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11034223e1704e809084c03409ba394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rock_Sprite: {fileID: -1102031571439885487, guid: e4ff828f9826f4a069e6525bb6434a98,
-    type: 3}
-  paper_Sprite: {fileID: 3854786910656487587, guid: e4ff828f9826f4a069e6525bb6434a98,
-    type: 3}
-  scissors_Sprite: {fileID: -7669977693629282755, guid: e4ff828f9826f4a069e6525bb6434a98,
-    type: 3}
+  disableScripts:
+  - {fileID: 0}
+  rock_Sprite: {fileID: 21300000, guid: e03a55a4e7dd0ab41b271e67688953b1, type: 3}
+  paper_Sprite: {fileID: 21300000, guid: f0aabf5d9fd662c4b8d7a39f2983c732, type: 3}
+  scissors_Sprite: {fileID: 21300000, guid: f19ce44b56b77484384f25b8b142f730, type: 3}
   playerChoice_Img: {fileID: 0}
   opponentChoice_Img: {fileID: 0}
   infoText: {fileID: 0}
@@ -80,3 +83,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9aa1dc5bc62041359439a9b7f0b0205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPlay: 0
+--- !u!114 &1296990887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa85d2713dcb024ba28a96a9e01ca29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1296990890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa815ff97dea7b40814d0a48a9cfa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OpponentTmpText: {fileID: 0}
+  PlayerTmpText: {fileID: 0}
+--- !u!114 &1296990891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185009594802739802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26bcd19c25dae84391b7ce4bc695cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winnerDisplay: {fileID: 0}

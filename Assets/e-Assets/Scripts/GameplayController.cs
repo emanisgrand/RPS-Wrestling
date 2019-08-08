@@ -12,7 +12,7 @@ public enum GamesChoices {
     SCISSORS
 }
 
-public class GameplayController : MonoBehaviour {
+public class GameplayController : AbstractBehavior {
 
     //? we don't want our behaviors to actually know anything about other behaviors. 
     //? All we want them to know is that at some point they can loop through all the scripts that are associated with it, 
@@ -42,7 +42,7 @@ public class GameplayController : MonoBehaviour {
                                 opponent_Choice = GamesChoices.NONE;
     private AnimationController animationController;
 
-    void Awake() {
+    void Start() {
         animationController = GetComponent<AnimationController>();
         opponent            = GameObject.FindGameObjectWithTag("Opponent");
         opponentScript      = opponent.GetComponent<Opponent>();
@@ -126,65 +126,71 @@ public class GameplayController : MonoBehaviour {
         if(player_Choice == opponent_Choice) {
             // draw
             infoText.text = "It's a Draw!";
-            StartCoroutine(DisplayWinnerAndRestart());
             Ungrapple();
+            StartCoroutine(DisplayWinnerAndRestart());
             return;
 
         }
 
-        if(player_Choice == GamesChoices.PAPER && opponent_Choice == GamesChoices.ROCK) {
+        if(player_Choice == GamesChoices.PAPER && opponent_Choice == GamesChoices.ROCK ||
+            player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS ||
+            player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER ) {
             // player won
             opponentScript.TakeDamage(1);
+            ToggleScripts(false);
             infoText.text = "You Win!";
             StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(DoSomeAnimation());
+            StartCoroutine(PlayerAttackAnim());
             return;
         }
 
-        if (opponent_Choice == GamesChoices.PAPER && player_Choice == GamesChoices.ROCK) {
+        if (opponent_Choice == GamesChoices.PAPER && player_Choice == GamesChoices.ROCK ||
+            opponent_Choice == GamesChoices.ROCK && player_Choice == GamesChoices.SCISSORS ||
+            opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER ) {
             // opponent won
             playerScript.TakeDamage(1);
+            ToggleScripts(false);
             infoText.text = "You Lose!";
             StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(DoSomeAnimation());
+            StartCoroutine(PlayerAttackAnim());
             return;
         }
 
-        if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS) {
-            // player won
-            opponentScript.TakeDamage(1);
-            infoText.text = "You Win!";
-            StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(DoSomeAnimation());
-            return;
-        }
+        // if (player_Choice == GamesChoices.ROCK && opponent_Choice == GamesChoices.SCISSORS) {
+        //     // player won
+        //     opponentScript.TakeDamage(1);
+        //     infoText.text = "You Win!";
+        //     StartCoroutine(DisplayWinnerAndRestart());
+        //     StartCoroutine(DoSomeAnimation());
+        //     return;
+        // }
 
-        if (opponent_Choice == GamesChoices.ROCK && player_Choice == GamesChoices.SCISSORS) {
-            // opponent won
-            playerScript.TakeDamage(1);
-            infoText.text = "You Lose!";
-            StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(DoSomeAnimation());
-            return;
-        }
+        // if (opponent_Choice == GamesChoices.ROCK && player_Choice == GamesChoices.SCISSORS) {
+        //     // opponent won
+        //     playerScript.TakeDamage(1);
+        //     infoText.text = "You Lose!";
+        //     StartCoroutine(DisplayWinnerAndRestart());
+        //     StartCoroutine(DoSomeAnimation());
+        //     return;
+        // }
 
-        if (player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER) {
-            // player won
-            opponentScript.TakeDamage(1);
-            infoText.text = "You Win!";
-            StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(DoSomeAnimation());
-            return;
-        }
+        // if (player_Choice == GamesChoices.SCISSORS && opponent_Choice == GamesChoices.PAPER) {
+        //     // player won
+        //     opponentScript.TakeDamage(1);
+        //     infoText.text = "You Win!";
+        //     StartCoroutine(DisplayWinnerAndRestart());
+        //     StartCoroutine(DoSomeAnimation());
+        //     return;
+        // }
 
-        if (opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER) {
-            // opponent won
-            playerScript.TakeDamage(1);;
-            infoText.text = "You Lose!";
-            StartCoroutine(DisplayWinnerAndRestart());
-            StartCoroutine(DoSomeAnimation());
-            return;
-        }
+        // if (opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER) {
+        //     // opponent won
+        //     playerScript.TakeDamage(1);;
+        //     infoText.text = "You Lose!";
+        //     StartCoroutine(DisplayWinnerAndRestart());
+        //     StartCoroutine(DoSomeAnimation());
+        //     return;
+        // }
        
     }
 
@@ -207,7 +213,7 @@ public class GameplayController : MonoBehaviour {
         oppAnimator.SetBool("isGrappled", false);
     }
 
-    IEnumerator DoSomeAnimation() {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */
+    IEnumerator PlayerAttackAnim() {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */
        oppAnimator = opponent.GetComponent<Animator>();
        playerAnimator = player.GetComponent<Animator>();
 
@@ -223,6 +229,25 @@ public class GameplayController : MonoBehaviour {
        yield return new WaitForSeconds(10f);  //*  use animation time */
        playerAnimator.SetBool("test", false);
        oppAnimator.SetBool("test", false);
+    }
+
+    IEnumerator OpponentAttackAnim()
+    {                         //* take in an array of possible animations or animation triggers set by the choice that gets made */
+        oppAnimator = opponent.GetComponent<Animator>();
+        playerAnimator = player.GetComponent<Animator>();
+
+        //* foreach (animation in animations[]) {  } */
+
+        opponentScript.isGrappled = false;
+        //In Opponent.OnTriggerEnter, The Opponent's transform is parented to an empty game obj that is attached to the player. 
+        //Here we unparent the Opponent's transform.
+        opponent.transform.parent = null;
+        oppAnimator.SetBool("isGrappled", false);
+        playerAnimator.SetBool("test", true);
+        oppAnimator.SetBool("test", true);
+        yield return new WaitForSeconds(10f);  //*  use animation time */
+        playerAnimator.SetBool("test", false);
+        oppAnimator.SetBool("test", false);
     }
 
     //TODO:👇Animation array logic 

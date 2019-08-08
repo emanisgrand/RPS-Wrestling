@@ -16,7 +16,8 @@ public class Opponent : MonoBehaviour
     public bool         isGrappled;     // big trigger which will be widely used.
     public float        health;
     public bool         oppLost;
-
+    public GameObject   gameOverUI;
+    
     // Private member variables
     [SerializeField]
     private Transform       grappleZone;
@@ -64,6 +65,7 @@ public class Opponent : MonoBehaviour
     public void TakeDamage(float damageAmount){
         health -= damageAmount;
         if (health <= 0) {
+            gameOverUI.SetActive(true);
             OpponentLoses();
             oppLost = false;
         } 
