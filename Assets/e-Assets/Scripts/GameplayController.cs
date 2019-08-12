@@ -20,8 +20,11 @@ public class GameplayController : AbstractBehavior {
     private GameObject          player;
     private Player              playerScript;
     private bool                canPlay;
-    
+    private Rigidbody           opponentRigidBody;
     private GameObject          winnerDisplay;
+    private CapsuleCollider     opponentCollider;
+
+    private float               defaultCapsuleHeight = 1.828423f;
 
     // Sprites & images
     [SerializeField]       
@@ -40,9 +43,12 @@ public class GameplayController : AbstractBehavior {
         animationController = GetComponent<AnimationController>();
         opponent            = GameObject.FindGameObjectWithTag("Opponent");
         opponentScript      = opponent.GetComponent<Opponent>();
+        oppAnimator         = opponent.GetComponent<Animator>();
         player              = GameObject.FindGameObjectWithTag("Player");
         playerScript        = player.GetComponent<Player>();       
-        
+        playerAnimator      = player.GetComponent<Animator>();
+        opponentRigidBody   = opponent.gameObject.GetComponent<Rigidbody>();
+        opponentCollider    = opponent.GetComponent<CapsuleCollider>();
         canPlay             = true;
     }
 
@@ -149,7 +155,7 @@ public class GameplayController : AbstractBehavior {
             opponent_Choice == GamesChoices.SCISSORS && player_Choice == GamesChoices.PAPER ) {
             // opponent won
             playerScript.TakeDamage(1);
-            ToggleScripts(false);
+            
             infoText.text = "KICK ROCKS";
             StartCoroutine(DisplayWinnerAndRestart());
             StartCoroutine(OpponentAttackAnim());
@@ -183,8 +189,9 @@ public class GameplayController : AbstractBehavior {
        oppAnimator.SetBool("isGrappled", false);
        playerAnimator.SetBool("won", true);
        oppAnimator.SetBool("lost", true);
-        //*  use animation time */
-        yield return new WaitForSeconds(4f);  
+       opponentCollider.height = 0.25f;
+       yield return new WaitForSeconds(4f);
+       opponentCollider.height = defaultCapsuleHeight;
        playerAnimator.SetBool("won", false);
        oppAnimator.SetBool("lost", false);
     }
@@ -200,7 +207,7 @@ public class GameplayController : AbstractBehavior {
         opponent.transform.parent = null;
         oppAnimator.SetBool("isGrappled", false);
         playerAnimator.SetBool("lost", true);
-        oppAnimator.SetBool("won", true);
+        oppAnimator.SetBool("won", true);        
         //*  use animation time */
         yield return new WaitForSeconds(4f);  
         playerAnimator.SetBool("lost", false);
