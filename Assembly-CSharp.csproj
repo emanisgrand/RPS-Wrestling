@@ -55,9 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Cube.cs" />
      <Compile Include="Assets\e-Assets\Inputs\Test Controls.cs" />
      <Compile Include="Assets\e-Assets\Scripts\AnimationController.cs" />
+     <Compile Include="Assets\e-Assets\Scripts\Command.cs" />
      <Compile Include="Assets\e-Assets\Scripts\DamageDisplay.cs" />
      <Compile Include="Assets\e-Assets\Scripts\DisplayWinner.cs" />
      <Compile Include="Assets\e-Assets\Scripts\GameplayController.cs" />
@@ -113,6 +113,12 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.Postprocessing.Editor">
+ <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Postprocessing.Runtime">
+ <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+ </Reference>
  <Reference Include="com.unity.cinemachine.editor">
  <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
@@ -121,12 +127,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
  <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Postprocessing.Editor">
- <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Postprocessing.Runtime">
- <HintPath>D:/Unity/2019.1/RPS Wrestling/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
